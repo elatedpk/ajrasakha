@@ -7,9 +7,13 @@ test.describe("Expert workspace (read-only)", () => {
     await page.goto("/home");
   });
 
-  test("expert lands in the authenticated workspace", async ({ page }) => {
+  test("expert lands in the authenticated workspace", async ({ page }, testInfo) => {
     await expect(page).toHaveURL(/\/home\/?(?:\?.*)?$/);
     await expect(page.getByRole("tab", { name: "My Queue" })).toBeVisible();
+    await testInfo.attach("expert-workspace", {
+      body: await page.screenshot({ fullPage: true }),
+      contentType: "image/png",
+    });
   });
 
   test("expert sees the all-questions tab", async ({ page }) => {
@@ -20,9 +24,13 @@ test.describe("Expert workspace (read-only)", () => {
     await expect(page.getByRole("tab", { name: "Dashboard" })).toBeVisible();
   });
 
-  test("expert can open their dashboard", async ({ page }) => {
+  test("expert can open their dashboard", async ({ page }, testInfo) => {
     await page.getByRole("tab", { name: "Dashboard" }).click();
     await expect(page.getByText("Delayed Questions", { exact: true })).toBeVisible();
+    await testInfo.attach("expert-dashboard", {
+      body: await page.screenshot({ fullPage: true }),
+      contentType: "image/png",
+    });
   });
 
   test("expert dashboard exposes incentive points", async ({ page }) => {
@@ -40,9 +48,13 @@ test.describe("Expert workspace (read-only)", () => {
     await expect(page.getByRole("tab", { name: "Questions" })).toBeVisible();
   });
 
-  test("expert can open their queue", async ({ page }) => {
+  test("expert can open their queue", async ({ page }, testInfo) => {
     await page.getByRole("tab", { name: "My Queue" }).click();
     await expect(page.getByText(/Questions|No questions found/i).first()).toBeVisible();
+    await testInfo.attach("expert-question-queue", {
+      body: await page.screenshot({ fullPage: true }),
+      contentType: "image/png",
+    });
   });
 
   test("expert can open notifications", async ({ page }) => {

@@ -32,5 +32,7 @@ Never point the suite at production or use personal reviewer accounts.
 
 The `Reviewer System E2E` workflow runs after a successful deployment to the
 configured staging site and can also be started manually. The Playwright HTML
-report and failure artifacts are uploaded by CI for review and demo. `docs/BUGS.md`
-separates source-level observations from defects reproduced in the browser.
+report includes screenshots of the moderator and expert workspaces and uploads
+failure screenshots, video, and traces as CI artifacts for review and demo.
+`docs/BUGS.md` separates source-level observations from defects reproduced in
+the browser.

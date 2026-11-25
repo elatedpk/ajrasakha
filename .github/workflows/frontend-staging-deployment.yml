@@ -55,6 +55,12 @@ jobs:
         run: |
           test -n "$VITE_API_BASE_URL_STAGING"
 
+      - name: Guard — staging Firebase project
+        env:
+          FIREBASE_PROJECT_ID_STAGING: ${{ secrets.FIREBASE_PROJECT_ID_STAGING }}
+        run: |
+          test -n "$FIREBASE_PROJECT_ID_STAGING"
+
       - name: Build frontend
         env:
           VITE_ENABLE_MOCKS: ${{ secrets.VITE_ENABLE_MOCKS }}
@@ -137,6 +143,12 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.GCP_GH_SA_KEY }}
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID_STAGING }}
           channelId: live
           entryPoint: ./deploy/staging
+
+      - name: Verify staging site is reachable
+        run: >-
+          curl --fail --silent --show-error --retry 10 --retry-all-errors
+          --retry-delay 3 --retry-max-time 45
+          https://ajrasakha-staging-594.web.app/ --output /dev/null

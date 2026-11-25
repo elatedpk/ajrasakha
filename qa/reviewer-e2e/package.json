@@ -1,0 +1,19 @@
+{
+  "name": "ajrasakha-reviewer-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --config=playwright.smoke.config.ts",
+    "test:staging": "playwright test --config=playwright.staging.config.ts",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.10.0",
+    "dotenv": "^17.2.3",
+    "typescript": "^5.9.3"
+  }
+}

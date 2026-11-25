@@ -327,6 +327,7 @@ export const AuthForm = ({
                       />
                       <button
                         type="button"
+                        aria-label={showPassword ? "Hide password" : "Show password"}
                         onClick={() => setShowPassword((prev) => !prev)}
                         className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
                       >
@@ -364,6 +365,7 @@ export const AuthForm = ({
                         />
                         <button
                           type="button"
+                          aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                           onClick={() => setShowConfirmPassword((prev) => !prev)}
                           className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 bg-transparent border-none cursor-pointer"
                         >
